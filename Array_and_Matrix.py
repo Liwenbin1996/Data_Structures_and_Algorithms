@@ -435,9 +435,9 @@ def maxLen(arr, k):
 def maxLen2(arr, k):
     if arr == None or len(arr) == 0:
         return 0
-    help = [0 for i in range(len(arr))]
+    help = [0 for i in range(len(arr))]   #以i位置开头能达到的最小累加和
     help[-1] = arr[-1]
-    map = {}
+    map = {}   #以位置i开头的最小累加和数组的最右位置
     map[len(arr)-1] = len(arr) - 1
     for i in range(len(arr)-2, -1, -1):
         if help[i+1] <= 0:
@@ -446,15 +446,19 @@ def maxLen2(arr, k):
         else:
             help[i] = arr[i]
             map[i] = i
-    res = 0
-    end = 0
-    sum = 0
+    res = 0   #全局变量记录最大子数组长度
+    end = 0   #子数组右边界的下一个位置
+    sum = 0   #子数组累加和
     for i in range(len(arr)):
+        #计算以i位置开头满足条件的最大子数组
         while end < len(arr) and sum + help[end] <= k:
             sum += help[end]
             end = map[end] + 1
+        #更新最大子数组长度
         res = max(res, end - i)
+        #子数组左边界向右移动一位
         sum -= arr[i] if end > i else 0
+        #更新end
         end = end if end > i else i + 1
     return res
 
