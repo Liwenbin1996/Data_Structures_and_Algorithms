@@ -233,10 +233,10 @@ def getNum(arr, num):
     res = 0
     while i < len(arr):
         while j < len(arr):
-            while qmin and qmin[-1] > arr[j]:
+            while qmin and arr[qmin[-1]] > arr[j]:
                 qmin.pop()
             qmin.append(j)
-            while qmax and qmax[-1] < arr[j]:
+            while qmax and arr[qmax[-1]] < arr[j]:
                 qmax.pop()
             qmax.append(j)
             if arr[qmax[0]] - arr[qmin[0]] > num:
