@@ -426,10 +426,38 @@ def maxLen(arr, k):
     sum = 0
     for i in range(len(arr)):
         sum += arr[i]
-        pre = getLessIndex(h, sum-k, i)   #这个位置是h中的下表，注意转换成arr中的下标
+        pre = getLessIndex(h, sum-k, i)   #这个位置是h中的下标，注意转换成arr中的下标
         tmpLen = 0 if pre == -1 else i-pre+1
         length = max(length, tmpLen)
     return length
+
+
+def maxLen2(arr, k):
+    if arr == None or len(arr) == 0:
+        return 0
+    help = [0 for i in range(len(arr))]
+    help[-1] = arr[-1]
+    map = {}
+    map[len(arr)-1] = len(arr) - 1
+    for i in range(len(arr)-2, -1, -1):
+        if help[i+1] <= 0:
+            help[i] = help[i+1] + arr[i]
+            map[i] = map[i+1]
+        else:
+            help[i] = arr[i]
+            map[i] = i
+    res = 0
+    end = 0
+    sum = 0
+    for i in range(len(arr)):
+        while end < len(arr) and sum + help[end] <= k:
+            sum += help[end]
+            end = map[end] + 1
+        res = max(res, end - i)
+        sum -= arr[i] if end > i else 0
+        end = end if end > i else i + 1
+    return res
+
 
 
 #计算数组的小和
@@ -842,7 +870,9 @@ printUniquePair([-8, -4, -3, 0, 1, 2, 4, 5, 8, 9], 10)
 printUniqueTriad([-8, -4, -3, 0, 1, 2, 4, 5, 8, 9], 10)
 print(getMaxLength([1,2,1,1,1], 3))
 print(maxLength([1,1,-2,1,3,4,5], 4))
+print("maxLen")
 print(maxLen([3, -2, -4, 0, 6], -2))
+print(maxLen2([3, -2, -4, 0, 6], -2))
 print(getSmallSum([1,3,5,2,4,6]))
 print(sort1([1,2,5,3,4]))
 print(sort2([1,2,5,3,4]))
