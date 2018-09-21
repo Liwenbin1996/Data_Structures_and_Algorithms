@@ -233,10 +233,10 @@ def getNum(arr, num):
     res = 0
     while i < len(arr):
         while j < len(arr):
-            while qmin and arr[qmin[-1]] > arr[j]:
+            while qmin and arr[qmin[-1]] >= arr[j]:
                 qmin.pop()
             qmin.append(j)
-            while qmax and arr[qmax[-1]] < arr[j]:
+            while qmax and arr[qmax[-1]] <= arr[j]:
                 qmax.pop()
             qmax.append(j)
             if arr[qmax[0]] - arr[qmin[0]] > num:
@@ -257,23 +257,23 @@ def getNum(arr, num):
 
 
 
-stack = NewStack2()
-stack.push(1)
-stack.push(2)
-print(stack.getMin())
-print(stack.pop())
-print(stack.pop())
-queue = TwoStackQueue()
-queue.add(3)
-queue.add(4)
-print(queue.peek())
-print(queue.poll())
-print(queue.peek())
-print(queue.poll())
-print(reverse([1,2,3,4,5]))
-print(sortByStack([1,3,4,4,5,2]))
-print(getMaxWindow([4,3,5,4,3,3,6,7], 3))
-preOrderMaxTree(getMaxTree([3,4,5,1,2]))
-print()
-print(maxRecSize([[1,0,1,1], [1,1,1,1], [1,1,1,0]]))
-print(getNum([1,2,3,4,5], 2))
+#stack = NewStack2()
+#stack.push(1)
+#stack.push(2)
+#print(stack.getMin())
+#print(stack.pop())
+#print(stack.pop())
+#queue = TwoStackQueue()
+#queue.add(3)
+#queue.add(4)
+#print(queue.peek())
+#print(queue.poll())
+#print(queue.peek())
+#print(queue.poll())
+#print(reverse([1,2,3,4,5]))
+#print(sortByStack([1,3,4,4,5,2]))
+#print(getMaxWindow([4,3,5,4,3,3,6,7], 3))
+#preOrderMaxTree(getMaxTree([3,4,5,1,2]))
+#print()
+#print(maxRecSize([[1,0,1,1], [1,1,1,1], [1,1,1,0]]))
+print(getNum([0,3,6,9], 2))

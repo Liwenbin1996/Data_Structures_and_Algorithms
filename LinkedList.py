@@ -259,7 +259,7 @@ def isPalindrome2(head):
     if head == None or head.next == None:
         return True
     stack = []
-    pre = head
+    pre = head.next
     cur = head
     while cur.next != None and cur.next.next != None:
         pre = pre.next
@@ -390,7 +390,7 @@ def listPartition2(head, pivot):
         head = head if head != None else eH
         if bH != None:
             eT.next = bH
-    return head
+    return head if head != None else bH
 
 
 #复制含有随机指针节点的链表
@@ -555,7 +555,7 @@ def bothLoop(head1, node1, head2, node2):
         cur1 = head1 if n >= 0 else head2
         cur2 = head1 if cur1 == head2 else head2
         n = abs(n)
-        while cur1 != 0:
+        while n != 0:
             n -= 1
             cur1 = cur1.next
         while cur1 != cur2:
